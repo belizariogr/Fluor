@@ -75,6 +75,7 @@ class BehaviorController: NSObject, BehaviorDidChangeObserver, DefaultModeViewCo
         } else {
             do { try FKeyManager.setCurrentFKeyMode(self.onLaunchKeyboardMode) }
             catch { AppErrorManager.terminateApp(withReason: error.localizedDescription) }
+            self.currentMode = self.onLaunchKeyboardMode
         }
     }
     
@@ -173,8 +174,17 @@ class BehaviorController: NSObject, BehaviorDidChangeObserver, DefaultModeViewCo
     ///
     /// - Parameter notification: The notification.
     @objc private func appMustWake(notification: Notification) {
-        self.changeKeyboard(mode: currentMode)
         self.applyAsObserver()
+        guard !AppManager.default.isDisabled else { return }
+        if let currentApp = NSWorkspace.shared.frontmostApplication,
+           let id = currentApp.bundleIdentifier ?? currentApp.executableURL?.lastPathComponent {
+            self.currentAppName = currentApp.localizedName
+            self.currentAppID = id
+            self.currentAppURL = currentApp.bundleURL
+            self.adaptModeForApp(withId: id)
+        } else {
+            self.changeKeyboard(mode: self.currentMode, notify: false)
+        }
     }
     
     /// Register self as an observer for some notifications.
@@ -197,30 +207,50 @@ class BehaviorController: NSObject, BehaviorDidChangeObserver, DefaultModeViewCo
     
     /// Set the function keys' behavior for the given app.
     ///
+    /// Always reapplies the desired HID mode so consecutive apps that share a
+    /// rule (e.g. two Media Keys apps) cannot leave the keyboard out of sync
+    /// with the menu icon.
+    ///
     /// - parameter id: The app's bundle id.
     private func adaptModeForApp(withId id: String) {
         guard self.switchMethod != .key else { return }
         let behavior = AppManager.default.behaviorForApp(id: id)
-        let mode = AppManager.default.keyboardStateFor(behavior: behavior)
-        guard mode != self.currentMode else { return }
-        self.currentMode = mode
-        self.changeKeyboard(mode: mode)
-}
+        let desiredMode = AppManager.default.keyboardStateFor(behavior: behavior)
+        let actualMode: FKeyMode
+        switch FKeyManager.getCurrentFKeyMode() {
+        case .success(let mode):
+            actualMode = mode
+        case .failure:
+            actualMode = self.currentMode
+        }
+        self.currentMode = desiredMode
+        self.changeKeyboard(mode: desiredMode, notify: desiredMode != actualMode)
+    }
     
-    private func changeKeyboard(mode: FKeyMode) {
+    private func changeKeyboard(mode: FKeyMode, notify: Bool = true) {
         do { try FKeyManager.setCurrentFKeyMode(mode) }
         catch { AppErrorManager.terminateApp(withReason: error.localizedDescription) }
         
+        self.updateStatusIcon(for: mode)
+        
+        if notify {
+            switch mode {
+            case .media:
+                os_log("Switch to Apple Mode for %@", self.currentAppID)
+            case .function:
+                NSLog("Switch to Other Mode for %@", self.currentAppID)
+            }
+            UserNotificationHelper.sendModeChangedTo(mode)
+        }
+    }
+    
+    private func updateStatusIcon(for mode: FKeyMode) {
         switch mode {
         case .media:
-            os_log("Switch to Apple Mode for %@", self.currentAppID)
-            self.statusMenuController.statusItem.image = AppManager.default.useLightIcon ? #imageLiteral(resourceName: "AppleMode") : #imageLiteral(resourceName: "IconAppleMode") 
+            self.statusMenuController.statusItem.image = AppManager.default.useLightIcon ? #imageLiteral(resourceName: "AppleMode") : #imageLiteral(resourceName: "IconAppleMode")
         case .function:
-            NSLog("Switch to Other Mode for %@", self.currentAppID)
             self.statusMenuController.statusItem.image = AppManager.default.useLightIcon ? #imageLiteral(resourceName: "OtherMode") : #imageLiteral(resourceName: "IconOtherMode")
         }
-        
-        UserNotificationHelper.sendModeChangedTo(mode)
     }
     
     private func manageKeyPress(event: NSEvent) {
