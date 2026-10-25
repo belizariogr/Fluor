@@ -135,25 +135,25 @@ class AppManager: BehaviorDidChangePoster {
     /// - parameter behavior: The new application's behavior.
     /// - parameter url:      The application's bundle url.
     func setBehaviorForApp(id: String, behavior: AppBehavior, url: URL) {
-        var change = false
+        // An app can move or be renamed while keeping its bundle identifier.
+        // Match the rule by that identifier, just like behaviorDict does.
+        let matchingRules = self.rules.filter { $0.id == id }
         if behavior == .inferred {
             self.behaviorDict.removeValue(forKey: id)
-            guard let index = self.rules.firstIndex(where: { $0.url == url }) else { fatalError() }
-            self.rules.remove(at: index)
-            change = true
-        } else if let previousBehavior = self.behaviorDict[id] {
-            if previousBehavior != behavior {
-                self.behaviorDict[id] = behavior
-                guard let rule = self.rules.first(where: { $0.url == url }) else { fatalError() }
-                rule.behavior = behavior
-                change = true
-            }
+            guard !matchingRules.isEmpty else { return }
+            self.rules.subtract(matchingRules)
         } else {
-            behaviorDict[id] = behavior
-            self.rules.insert(.init(id: id, url: url, behavior: behavior))
-            change = true
+            self.behaviorDict[id] = behavior
+            if matchingRules.count == 1, let rule = matchingRules.first, rule.url == url {
+                rule.behavior = behavior
+            } else {
+                // URL contributes to Rule's hash, so replace moved rules rather
+                // than mutating their URL while they are members of the set.
+                self.rules.subtract(matchingRules)
+                self.rules.insert(.init(id: id, url: url, behavior: behavior))
+            }
         }
-        if change { synchronizeRules() }
+        synchronizeRules()
     }
     
     
