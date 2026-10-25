@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D158151B04DB4A87A83C4F58 /* FunctionKeys.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4F95B07DACF6414D8031A166 /* FunctionKeys.strings */; };
+		33CA038F43A041D79432B92C /* FunctionKeysPreferencesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7010648EADEC41D4B5ED9FA9 /* FunctionKeysPreferencesViewController.swift */; };
+		4433CF9DFA594E6B8940379E /* FunctionKeyOverrideController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23BD14FDF66E4E898BFB3B33 /* FunctionKeyOverrideController.swift */; };
+		7DE29B68CE2A44EFA6B7F2E6 /* SystemFunctionKeyMappingBackend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EFD738F8DD845739AEAD917 /* SystemFunctionKeyMappingBackend.swift */; };
+		FA5F4FA9EAE14E9EAAC97F3D /* FunctionKeyMappingEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF696B5DE214C558C17256A /* FunctionKeyMappingEngine.swift */; };
+		D690E6D5E93C418E959FECFE /* FunctionKeyOverrides.swift in Sources */ = {isa = PBXBuildFile; fileRef = E75AF262E42543F8BBA336A3 /* FunctionKeyOverrides.swift */; };
 		625D6B50A0654D258F0FEF91 /* UpdatesPreferencesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 625D6B50A0654D258F0FEF92 /* UpdatesPreferencesViewController.swift */; };
 		3F0A2A302014BA11009F9610 /* RunningAppsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0A2A2F2014BA11009F9610 /* RunningAppsViewController.swift */; };
 		3F0A2A332014BA2D009F9610 /* RunningApps.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3F0A2A312014BA2D009F9610 /* RunningApps.storyboard */; };
@@ -84,6 +90,12 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		3C30F2D2D0114AD7B07D73CE /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en"; path = "en.lproj/FunctionKeys.strings"; sourceTree = "<group>"; };
+		7010648EADEC41D4B5ED9FA9 /* FunctionKeysPreferencesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FunctionKeysPreferencesViewController.swift; sourceTree = "<group>"; };
+		23BD14FDF66E4E898BFB3B33 /* FunctionKeyOverrideController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FunctionKeyOverrideController.swift; sourceTree = "<group>"; };
+		8EFD738F8DD845739AEAD917 /* SystemFunctionKeyMappingBackend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemFunctionKeyMappingBackend.swift; sourceTree = "<group>"; };
+		ACF696B5DE214C558C17256A /* FunctionKeyMappingEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FunctionKeyMappingEngine.swift; sourceTree = "<group>"; };
+		E75AF262E42543F8BBA336A3 /* FunctionKeyOverrides.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FunctionKeyOverrides.swift; sourceTree = "<group>"; };
 		625D6B50A0654D258F0FEF92 /* UpdatesPreferencesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdatesPreferencesViewController.swift; sourceTree = "<group>"; };
 		3DF3612324C206AD00231BF5 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/MainMenu.strings"; sourceTree = "<group>"; };
 		3DF3612424C206AD00231BF5 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/RunningApps.strings"; sourceTree = "<group>"; };
@@ -178,6 +190,8 @@
 		3F4ABD13201941820075B178 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				ACF696B5DE214C558C17256A /* FunctionKeyMappingEngine.swift */,
+				E75AF262E42543F8BBA336A3 /* FunctionKeyOverrides.swift */,
 				3F2FA4041D7A1F87003E2AD8 /* AppManager.swift */,
 				3F8F93BC1EEAF1EB00FCE91F /* RuleValueTransformer.swift */,
 				3FC44EF91D7F169A0065D433 /* Enums.swift */,
@@ -190,6 +204,7 @@
 		3F4ABD15201941C80075B178 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				23BD14FDF66E4E898BFB3B33 /* FunctionKeyOverrideController.swift */,
 				3FE7E0DE1D7CA14600DC754D /* LaunchAtLoginController.h */,
 				3FE7E0DF1D7CA14600DC754D /* LaunchAtLoginController.m */,
 				3F2FA3FE1D79D094003E2AD8 /* StatusMenuController.swift */,
@@ -216,6 +231,7 @@
 		3F4C5CAE20194394006CC84A /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				7010648EADEC41D4B5ED9FA9 /* FunctionKeysPreferencesViewController.swift */,
 				3FF2410A1EDB4E0000E524CD /* SwitchMethodViewController.swift */,
 				3F2FA4021D7A059F003E2AD8 /* CurrentAppViewController.swift */,
 				3F2FA4001D79D66D003E2AD8 /* DefaultModeViewController.swift */,
@@ -248,6 +264,7 @@
 		3F4C5CB02019441D006CC84A /* Misc */ = {
 			isa = PBXGroup;
 			children = (
+				8EFD738F8DD845739AEAD917 /* SystemFunctionKeyMappingBackend.swift */,
 				3FD0AFA523C62CD400DC9533 /* FKeyManager.swift */,
 				3F2571F31FDBD43500020194 /* TableViewContentAnimator.swift */,
 				3FCD16A41D79793600C57B22 /* AppDelegate.swift */,
@@ -318,6 +335,7 @@
 				3FCD16A61D79793600C57B22 /* Assets.xcassets */,
 				3F3433331E50C53A009F4D86 /* ReleaseNotes.rtf */,
 				3FE7B6CB245DC6180027DB39 /* Localizable.strings */,
+				4F95B07DACF6414D8031A166 /* FunctionKeys.strings */,
 				3FCD16AB1D79793600C57B22 /* Info.plist */,
 				3F0E64141D8A8A59003243FE /* Fluor-Bridging-Header.h */,
 				3FBE4C282222AB0200782647 /* dsa_pub.pem */,
@@ -425,6 +443,7 @@
 				3FCD16A71D79793600C57B22 /* Assets.xcassets in Resources */,
 				3FE784E12053D455007F6200 /* README.md in Resources */,
 				3FE7B6C9245DC6180027DB39 /* Localizable.strings in Resources */,
+				D158151B04DB4A87A83C4F58 /* FunctionKeys.strings in Resources */,
 				3F0A2A332014BA2D009F9610 /* RunningApps.storyboard in Resources */,
 				3F820C412219B63F00004813 /* Preferences.storyboard in Resources */,
 				3F883E76240050A600E2A7D7 /* Main.xib in Resources */,
@@ -461,6 +480,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				33CA038F43A041D79432B92C /* FunctionKeysPreferencesViewController.swift in Sources */,
+				4433CF9DFA594E6B8940379E /* FunctionKeyOverrideController.swift in Sources */,
+				7DE29B68CE2A44EFA6B7F2E6 /* SystemFunctionKeyMappingBackend.swift in Sources */,
+				FA5F4FA9EAE14E9EAAC97F3D /* FunctionKeyMappingEngine.swift in Sources */,
+				D690E6D5E93C418E959FECFE /* FunctionKeyOverrides.swift in Sources */,
 				3F4E36C32111EF7A00CDCAA0 /* CheckableMenuItem.swift in Sources */,
 				3F2571F41FDBD43500020194 /* TableViewContentAnimator.swift in Sources */,
 				3F7C349C1ED5EBAA0020C538 /* BehaviorController.swift in Sources */,
@@ -511,6 +535,14 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		4F95B07DACF6414D8031A166 /* FunctionKeys.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3C30F2D2D0114AD7B07D73CE /* en */,
+			);
+			name = FunctionKeys.strings;
+			sourceTree = "<group>";
+		};
 		3F0A2A312014BA2D009F9610 /* RunningApps.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (

@@ -56,6 +56,11 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
         UserNotificationHelper.askUserAtLaunch()
         
         self.loadMainMenu()
+        FunctionKeyOverrideController.shared.start()
+    }
+
+    func applicationWillTerminate(_ notification: Notification) {
+        FunctionKeyOverrideController.shared.stop()
     }
     
     private func loadMainMenu() {

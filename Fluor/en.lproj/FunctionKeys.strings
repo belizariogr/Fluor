@@ -1,0 +1,22 @@
+/* Per-key media/function exceptions. */
+"F Keys" = "F Keys";
+"Follow mode" = "Follow mode";
+"Always function" = "Always function";
+"Always media" = "Always media";
+"Choose exceptions for all apps and compatible keyboards. Fixed keys keep their action even while Fn/Globe is held." = "Choose exceptions for all apps and compatible keyboards. Fixed keys keep their action even while Fn/Globe is held.";
+"Media uses the keyboard’s original action, such as brightness, Dictation or volume." = "Media uses the keyboard’s original action, such as brightness, Dictation or volume.";
+"Reset all to follow mode" = "Reset all to follow mode";
+"Behavior for %@" = "Behavior for %@";
+"Keyboard status" = "Keyboard status";
+"Keyboard" = "Keyboard";
+"Reading connected keyboards…" = "Reading connected keyboards…";
+"Exceptions are paused while Fluor is disabled or the session is inactive." = "Exceptions are paused while Fluor is disabled or the session is inactive.";
+"All F keys follow the current mode." = "All F keys follow the current mode.";
+"No keyboard is connected." = "No keyboard is connected.";
+"%@: cannot identify the media action for %@." = "%@: cannot identify the media action for %@.";
+"%@: %ld active exceptions." = "%@: %ld active exceptions.";
+"%@: media actions could not be identified." = "%@: media actions could not be identified.";
+"Unable to read connected keyboards." = "Unable to read connected keyboards.";
+"Unable to read existing keyboard mappings safely." = "Unable to read existing keyboard mappings safely.";
+"macOS did not apply the keyboard mappings." = "macOS did not apply the keyboard mappings.";
+"Unable to save keyboard mapping recovery data." = "Unable to save keyboard mapping recovery data.";

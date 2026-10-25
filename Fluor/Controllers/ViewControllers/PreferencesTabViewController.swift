@@ -30,6 +30,15 @@
 import Cocoa
 
 class PreferencesTabViewController: NSTabViewController, TriggerSectionVisibilityDidChangePoster, SwitchMethodDidChangePoster {
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        let item = NSTabViewItem(viewController: FunctionKeysPreferencesViewController())
+        item.identifier = "function_keys_tab"
+        item.label = FKeyLocalized("F Keys")
+        item.image = NSImage(systemSymbolName: "keyboard", accessibilityDescription: item.label)
+        insertTabViewItem(item, at: min(3, tabViewItems.count))
+    }
+
     @IBAction func changeTriggerSectionVisibility(_ sender: NSButton) {
         let visible = sender.state == .off
         if !visible {
