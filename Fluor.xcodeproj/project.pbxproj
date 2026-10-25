@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		625D6B50A0654D258F0FEF91 /* UpdatesPreferencesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 625D6B50A0654D258F0FEF92 /* UpdatesPreferencesViewController.swift */; };
 		3F0A2A302014BA11009F9610 /* RunningAppsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0A2A2F2014BA11009F9610 /* RunningAppsViewController.swift */; };
 		3F0A2A332014BA2D009F9610 /* RunningApps.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3F0A2A312014BA2D009F9610 /* RunningApps.storyboard */; };
 		3F15629C23FE892A00CD0773 /* MoverImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F15629B23FE892A00CD0773 /* MoverImageView.swift */; };
@@ -83,6 +84,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		625D6B50A0654D258F0FEF92 /* UpdatesPreferencesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdatesPreferencesViewController.swift; sourceTree = "<group>"; };
 		3DF3612324C206AD00231BF5 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/MainMenu.strings"; sourceTree = "<group>"; };
 		3DF3612424C206AD00231BF5 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/RunningApps.strings"; sourceTree = "<group>"; };
 		3DF3612524C206AD00231BF5 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/RulesEditor.strings"; sourceTree = "<group>"; };
@@ -218,6 +220,7 @@
 				3F2FA4021D7A059F003E2AD8 /* CurrentAppViewController.swift */,
 				3F2FA4001D79D66D003E2AD8 /* DefaultModeViewController.swift */,
 				3F8879921FBF5F2A005C28E6 /* PreferencesTabViewController.swift */,
+				625D6B50A0654D258F0FEF92 /* UpdatesPreferencesViewController.swift */,
 				3F0A2A2F2014BA11009F9610 /* RunningAppsViewController.swift */,
 				3F4ABD0F20193B8D0075B178 /* RulesEditorViewController.swift */,
 				3F6D52CB2069667300517E57 /* AboutViewController.swift */,
@@ -371,7 +374,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
 				LastSwiftUpdateCheck = 0800;
-				LastUpgradeCheck = 2660;
+				LastUpgradeCheck = 2710;
 				ORGANIZATIONNAME = Pyrolyse;
 				TargetAttributes = {
 					3FCD16A01D79793600C57B22 = {
@@ -448,7 +451,8 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "true\n";
+			shellScript = "true
+";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -497,6 +501,7 @@
 				3FE7E0E01D7CA14600DC754D /* LaunchAtLoginController.m in Sources */,
 				3FF655CA20751D1600C8D2FC /* PFMoveApplication.m in Sources */,
 				3F8879931FBF5F2A005C28E6 /* PreferencesTabViewController.swift in Sources */,
+				625D6B50A0654D258F0FEF91 /* UpdatesPreferencesViewController.swift in Sources */,
 				3F2FA4051D7A1F87003E2AD8 /* AppManager.swift in Sources */,
 				3F6D52CE20696E2100517E57 /* PoppingLinkButton.swift in Sources */,
 				3FC44EFA1D7F169A0065D433 /* Enums.swift in Sources */,
@@ -707,6 +712,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Fluor/Fluor.entitlements;
 				CODE_SIGN_IDENTITY = "Mac Developer";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 6;
@@ -722,7 +728,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 11.0;
+				MACOSX_DEPLOYMENT_TARGET = "$(RECOMMENDED_MACOSX_DEPLOYMENT_TARGET)";
 				MARKETING_VERSION = 2.5.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.thinksoft.Fluor;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -742,6 +748,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Fluor/Fluor.entitlements;
 				CODE_SIGN_IDENTITY = "Mac Developer";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 6;
@@ -757,7 +764,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 11.0;
+				MACOSX_DEPLOYMENT_TARGET = "$(RECOMMENDED_MACOSX_DEPLOYMENT_TARGET)";
 				MARKETING_VERSION = 2.5.1;
 				OTHER_SWIFT_FLAGS = "-DRELEASE";
 				PRODUCT_BUNDLE_IDENTIFIER = com.thinksoft.Fluor;
