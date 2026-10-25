@@ -8,6 +8,7 @@ import tempfile
 
 parser = argparse.ArgumentParser(description=__doc__)
 parser.add_argument("--show", action="store_true", help="Leave the test preferences open for visual inspection")
+parser.add_argument("--snapshots", action="store_true", help="Render light/dark preference snapshots into build/function-key-snapshots")
 args = parser.parse_args()
 root = Path(__file__).resolve().parent.parent
 
@@ -36,6 +37,10 @@ with tempfile.TemporaryDirectory(prefix="Fluor-preferences-ui-") as temporary:
     command = [str(app / "Contents/MacOS/Fluor"), "-AppleLanguages", "(en)"]
     if args.show:
         command.append("--show")
+    if args.snapshots:
+        directory = root / "build/function-key-snapshots"
+        directory.mkdir(exist_ok=True)
+        command.extend(["--snapshot-directory", str(directory)])
     process = subprocess.Popen(command)
     try:
         result = process.wait(timeout=None if args.show else 30)

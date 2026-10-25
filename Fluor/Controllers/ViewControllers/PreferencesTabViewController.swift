@@ -35,7 +35,7 @@ class PreferencesTabViewController: NSTabViewController, TriggerSectionVisibilit
         let item = NSTabViewItem(viewController: FunctionKeysPreferencesViewController())
         item.identifier = "function_keys_tab"
         item.label = FKeyLocalized("F Keys")
-        item.image = NSImage(systemSymbolName: "keyboard", accessibilityDescription: item.label)
+        item.image = NSImage(named: NSImage.Name("OtherMode"))
         insertTabViewItem(item, at: min(3, tabViewItems.count))
     }
 

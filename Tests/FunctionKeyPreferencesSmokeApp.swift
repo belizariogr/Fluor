@@ -19,24 +19,57 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
             tabs.selectedTabViewItemIndex = keysIndex
             let keysView = tabs.tabViewItems[keysIndex].viewController!.view
             keysView.layoutSubtreeIfNeeded()
-            let controls = descendants(keysView).compactMap { $0 as? NSPopUpButton }
+            let controls = descendants(keysView).compactMap { $0 as? NSSegmentedControl }
             precondition(controls.count == 12)
+            let choices: [FunctionKeyOverride] = [.followMode, .media, .function]
             for control in controls {
                 let rect = keysView.convert(control.bounds, from: control)
                 precondition(keysView.bounds.insetBy(dx: -1, dy: -1).contains(rect), "Clipped F-key control: \(control.tag), \(rect), \(keysView.bounds)")
-                precondition(control.numberOfItems == 3 && control.indexOfSelectedItem == 0)
+                precondition(control.segmentCount == 3 && control.selectedSegment == 0)
+                for (index, choice) in choices.enumerated() {
+                    precondition(control.image(forSegment: index)?.isValid == true)
+                    precondition(control.image(forSegment: index)?.accessibilityDescription == choice.title)
+                    precondition(control.toolTip(forSegment: index) == choice.title)
+                    precondition((control.label(forSegment: index) ?? "").isEmpty)
+                }
             }
-            for (number, choice) in [(5, 1), (10, 2)] {
+            for (number, choice) in [(5, 2), (10, 1)] {
                 let control = controls.first { $0.tag == number }!
-                control.selectItem(at: choice)
+                control.selectedSegment = choice
                 control.sendAction(control.action!, to: control.target)
             }
             precondition(FunctionKeyOverrideController.shared.overrides == [.f5: .function, .f10: .media])
-            let reset = descendants(keysView).compactMap { $0 as? NSButton }.first { $0.title == FKeyLocalized("Reset all to follow mode") }!
+            tabs.view.window?.close()
+            let reopened = openPreferences()
+            precondition(reopened !== tabs)
+            reopened.selectedTabViewItemIndex = keysIndex
+            let reopenedView = reopened.tabViewItems[keysIndex].viewController!.view
+            let restored = descendants(reopenedView).compactMap { $0 as? NSSegmentedControl }
+            precondition(restored.first { $0.tag == 5 }?.selectedSegment == 2)
+            precondition(restored.first { $0.tag == 10 }?.selectedSegment == 1)
+            let reset = descendants(reopenedView).compactMap { $0 as? NSButton }.first { $0.title == FKeyLocalized("Reset all to follow mode") }!
             reset.performClick(nil)
             precondition(FunctionKeyOverrideController.shared.overrides.isEmpty)
-            NSLog("UI PASS cycle %d: five tabs, twelve visible controls, immediate edits and reset", cycle)
-            tabs.view.window?.close()
+            precondition(restored.allSatisfy { $0.selectedSegment == 0 })
+            NSLog("UI PASS cycle %d: twelve icon selectors, accessible labels, saved selections and reset", cycle)
+            reopened.view.window?.close()
+        }
+        if let argument = CommandLine.arguments.firstIndex(of: "--snapshot-directory") {
+            let tabs = openPreferences()
+            tabs.selectedTabViewItemIndex = tabs.tabViewItems.firstIndex { ($0.identifier as? String) == "function_keys_tab" }!
+            let directory = URL(fileURLWithPath: CommandLine.arguments[argument + 1])
+            let window = tabs.view.window!
+            let frameView = window.contentView!.superview!
+            for (name, appearance) in [("light", NSAppearance.Name.aqua), ("dark", .darkAqua)] {
+                window.appearance = NSAppearance(named: appearance)
+                window.layoutIfNeeded()
+                frameView.display()
+                let bitmap = frameView.bitmapImageRepForCachingDisplay(in: frameView.bounds)!
+                frameView.cacheDisplay(in: frameView.bounds, to: bitmap)
+                let data = bitmap.representation(using: .png, properties: [:])!
+                try! data.write(to: directory.appendingPathComponent("function-keys-\(name).png"))
+            }
+            window.close()
         }
         if CommandLine.arguments.contains("--show") {
             let tabs = openPreferences()

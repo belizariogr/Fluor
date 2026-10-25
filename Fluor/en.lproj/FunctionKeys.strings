@@ -3,8 +3,7 @@
 "Follow mode" = "Follow mode";
 "Always function" = "Always function";
 "Always media" = "Always media";
-"Choose exceptions for all apps and compatible keyboards. Fixed keys keep their action even while Fn/Globe is held." = "Choose exceptions for all apps and compatible keyboards. Fixed keys keep their action even while Fn/Globe is held.";
-"Media uses the keyboard’s original action, such as brightness, Dictation or volume." = "Media uses the keyboard’s original action, such as brightness, Dictation or volume.";
+"Applies to all apps, even with Fn/Globe held." = "Applies to all apps, even with Fn/Globe held.";
 "Reset all to follow mode" = "Reset all to follow mode";
 "Behavior for %@" = "Behavior for %@";
 "Keyboard status" = "Keyboard status";
